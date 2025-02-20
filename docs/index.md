@@ -92,3 +92,18 @@ Dengan AkuTrust, pengawasan anggaran daerah menjadi lebih mudah dan akuntabel, m
 
 Dengan AkuTrust, kita bersama-sama membangun pemerintahan yang lebih bersih, transparan, dan akuntabel untuk Indonesia Emas 2045! 🚀
 
+---
+
+## Use Case Diagram  
+Berikut adalah diagram use case AkuTrust yang menggambarkan bagaimana sistem bekerja dan pihak-pihak yang terlibat:  
+
+![Use Case AkuTrust](use-case-akutrust.png)  
+
+---
+
+## Entity Relationship Diagram (ERD)  
+Diagram ERD berikut menunjukkan bagaimana data dalam AkuTrust diorganisasikan:  
+
+![ERD AkuTrust](erd-akutrust.png)  
+
+
