@@ -1,6 +1,6 @@
-# TechPath
+# AkuTrust
 
-Cari karir ITmu bersama TechPath
+AkuTrust merupakan platform berbasis AI yang dirancang untuk meningkatkan transparansi dan efisiensi dalam pengelolaan dana penataan dan rehabilitasi bangunan untuk mendorong perubahan sistematis dalam pengelolaan keuangan daerah otonom di Indonesia untuk meningkatkan efisiensi dan transparansi melalui penggunaan AkuTrust.
 
 Kelompok 06
 Ketua Kelompok: Hanifah Putri Ariani - 22/504042/TK/55111 <br>
