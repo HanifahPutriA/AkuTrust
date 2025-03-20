@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { FaCheckCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -80,12 +81,14 @@ export function HeroSection() {
           >
             Revolutionizing financial management for the public sector with AI-driven transparency and accountability. Empowering institutions, ensuring integrity.
           </motion.p>
-          <motion.button
-            className="w-40 mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium shadow-md hover:bg-blue-700 transition"
-            whileHover={hoverEffect}
-          >
-            Get Started
-          </motion.button>
+          <Link to="/homepage">
+            <motion.button
+              className="w-40 mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium shadow-md hover:bg-blue-700 transition"
+              whileHover={hoverEffect}
+            >
+              Get Started
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Right Section */}
