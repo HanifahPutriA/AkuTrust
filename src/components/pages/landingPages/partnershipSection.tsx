@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -25,7 +27,7 @@ export function PartnershipSection() {
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       variants={fadeInUp}
-      className="h-[40vh] w-full flex flex-col items-center justify-center px-4 md:px-0"
+      className="h-[80vh] w-full flex flex-col items-center justify-center px-4 md:px-0"
     >
       <h1 className="font-inter font-semibold text-[10px] md:text-base text-black opacity-65 text-center">
         Our Partnership & Commitment <span className="text-[#1877AA]">to Transparency</span>

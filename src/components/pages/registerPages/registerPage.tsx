@@ -3,14 +3,14 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaArrowLeft, FaExclamationCircle, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export function RegisterPage() {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,9 +18,10 @@ export function RegisterPage() {
     setEmailError("");
     setPasswordError("");
 
-    const name = (e.target as any).name.value;
-    const email = (e.target as any).email.value;
-    const password = (e.target as any).password.value;
+    const form = e.target as HTMLFormElement;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
 
     if (!name) {
       setNameError("Name is required");
@@ -36,7 +37,7 @@ export function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen w-full">
+    <div className="flex flex-col md:flex-row h-auto w-full">
       {/* Left Side with Image and Text */}
       <div className="w-full md:w-1/2 relative flex items-center justify-center bg-gray-100 h-64 md:h-screen">
         <Image
@@ -49,8 +50,8 @@ export function RegisterPage() {
         <div className="flex flex-col justify-between md:flex-row z-10 h-full py-7 px-7">
           <div className="w-full md:w-2/4 flex items-start justify-start">
             <button 
-              className="text-white font-jakarta font-medium text-lg flex items-center"
-              onClick={() => navigate('/')}  
+              onClick={() => router.back()}
+              className="text-white font-jakarta font-medium text-lg flex items-center"   
             >
               <FaArrowLeft className="mr-2" />
               Kembali
@@ -122,7 +123,7 @@ export function RegisterPage() {
                 </div>
               )}
             </div>
-            <button className="w-full bg-[#1877AA] text-white py-2 font-inter text-sm rounded-md hover:bg-blue-700">
+            <button className="w-full bg-[#1877AA] text-white py-2 font-inter text-sm rounded-md hover:bg-blue-700" onClick={() => router.push('/landingPage')}>
               Sign In
             </button>
           </form>
@@ -133,14 +134,22 @@ export function RegisterPage() {
             <div className="flex-grow border-t border-black"></div>
           </div>
 
-          <button className="w-full bg-[#D1E0FF] border border-[#0479CE] border-2 text-[#00359E] font-inter font-medium text-sm py-2 rounded-md hover:bg-blue-300">
+          <button className="w-full bg-[#D1E0FF] border-[#0479CE] border-2 text-[#00359E] font-inter font-medium text-sm py-2 rounded-md hover:bg-blue-300">
             Using ID for Government and Verificator
           </button>
           <p className="text-center text-black font-jakarta font-bold mt-4 text-sm">
-            Have an Account already? <a href="#" className="text-[#0040C1]">Login</a>
+            Have an Account already?{' '}
+            <span 
+              onClick={() => router.push('/login')} 
+              className="text-[#0040C1] cursor-pointer hover:underline"
+            >
+              Login
+            </span>
           </p>
         </div>
       </div>
     </div>
   );
 }
+
+export default RegisterPage;

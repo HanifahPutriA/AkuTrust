@@ -1,8 +1,10 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import { FaCheckCircle } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -51,6 +53,7 @@ const textVariants = {
 };
 
 export function HeroSection() {
+  const router = useRouter();
   return (
     <>
       <motion.div
@@ -81,14 +84,13 @@ export function HeroSection() {
           >
             Revolutionizing financial management for the public sector with AI-driven transparency and accountability. Empowering institutions, ensuring integrity.
           </motion.p>
-          <Link to="/homepage">
-            <motion.button
-              className="w-40 mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium shadow-md hover:bg-blue-700 transition"
-              whileHover={hoverEffect}
-            >
-              Get Started
-            </motion.button>
-          </Link>
+          <motion.button
+            className="w-40 mt-6 bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-medium shadow-md hover:bg-blue-700 transition"
+            whileHover={hoverEffect}
+            onClick={() => router.push('/homePage')} 
+          >
+            Get Started
+          </motion.button>
         </motion.div>
 
         {/* Right Section */}
@@ -97,11 +99,7 @@ export function HeroSection() {
           className="w-full md:w-7/12 relative flex items-center justify-start md:justify-end"
         >
             <div className="w-4/5 md:w-full mr-20 flex justify-start md:justify-start">
-              <motion.div 
-                className="relative overflow-hidden rounded-lg"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
+              <div className="relative overflow-hidden rounded-lg">
                 <Image 
                   src="/people.svg" 
                   alt="Business People" 
@@ -109,7 +107,7 @@ export function HeroSection() {
                   height={800} 
                   className="relative z-10" 
                 />
-              </motion.div>
+              </div>
             </div>
             
             <motion.div 

@@ -85,3 +85,5 @@ export function FooterSection() {
     </div>
   );
 }
+
+export default FooterSection;

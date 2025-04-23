@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import  Link  from 'next/link';
 import clsx from 'clsx';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
@@ -84,7 +84,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu Items */}
-        <div className="hidden items-center space-x-16 lg:flex">
+        <div className="hidden items-center space-x-5 lg:flex">
           {menuItems.map((item) => (
             <button
               key={item.path}
@@ -96,7 +96,7 @@ const Navbar = () => {
           ))}
           <div className="flex gap-5">
             <div>
-              <Link to="/login">
+              <Link href="/login">
                 <Button className="h-11 rounded-lg bg-[#1877AA] py-2 px-8 text-white hover:bg-[#155d8a]">
                   Login
                 </Button>
@@ -104,7 +104,7 @@ const Navbar = () => {
             </div>
         
             <div>
-              <Link to="/register">
+              <Link href="/register">
                 <Button className="flex h-11 items-center space-x-2 rounded-xl border border-[#FFFFFF] py-2 px-8 bg-transparent text-sm text-white hover:bg-[#FFFFFF] hover:text-[#1877AA]">
                   <span>Sign Up</span>
                 </Button>
@@ -143,7 +143,7 @@ const Navbar = () => {
 
           {/* Mobile Action Buttons */}
           <div className="flex w-full flex-col items-center space-y-4 px-8 pt-8">
-            <Link to="/login" className="w-full flex justify-center">
+            <Link href="/login" className="w-full flex justify-center">
               <Button
                 className="h-12 w-2/4 rounded-lg bg-[#1877AA] text-white hover:bg-[#155d8a]"
                 onClick={() => setIsMenuOpen(false)}
@@ -152,7 +152,7 @@ const Navbar = () => {
               </Button>
             </Link>
 
-            <Link to="/register" className="w-full flex justify-center">
+            <Link href="/register" className="w-full flex justify-center">
               <Button
                 className="flex h-12 w-2/4 items-center space-x-2 rounded-xl border-2 border-[#1877AA] bg-transparent px-4 py-2 text-sm text-white hover:bg-[#1877AA] hover:text-white"
                 onClick={() => setIsMenuOpen(false)}

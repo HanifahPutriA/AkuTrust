@@ -3,21 +3,22 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaArrowLeft, FaExclamationCircle, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export function LoginPage() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setEmailError("");
     setPasswordError("");
 
-    const email = (e.target as any).email.value;
-    const password = (e.target as any).password.value;
+    const form = e.target as HTMLFormElement;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const password = (form.elements.namedItem("password") as HTMLInputElement).value;
 
     if (!email) {
       setEmailError("Email is required");
@@ -43,7 +44,7 @@ export function LoginPage() {
           <div className="w-full md:w-2/4 flex items-start justify-start">
             <button
               className="text-white font-jakarta font-medium text-lg flex items-center"
-              onClick={() => navigate('/')}
+              onClick={() => router.back()}
             >
               <FaArrowLeft className="mr-2" />
               Kembali
@@ -101,7 +102,7 @@ export function LoginPage() {
               )}
             </div>
 
-            <button className="w-full bg-[#1877AA] text-white py-2 font-inter text-sm rounded-md hover:bg-blue-700">
+            <button className="w-full bg-[#1877AA] text-white py-2 font-inter text-sm rounded-md hover:bg-blue-700" onClick={() => router.push('/landingPage')}>
               Login
             </button>
           </form>
@@ -116,10 +117,12 @@ export function LoginPage() {
             Using ID for Government and Verificator
           </button>
           <p className="text-center text-black font-jakarta font-bold mt-4 text-sm">
-            Don't have an account? <a href="#" className="text-[#0040C1]">Sign In</a>
+            Don&apos;t have an account? <a href="#" className="text-[#0040C1]">Sign In</a>
           </p>
         </div>
       </div>
     </div>
   );
 }
+
+export default LoginPage;
