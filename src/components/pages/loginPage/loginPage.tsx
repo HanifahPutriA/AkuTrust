@@ -9,23 +9,55 @@ export function LoginPage() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loginError, setLoginError] = useState("");
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setEmailError("");
     setPasswordError("");
-
+    setLoginError("");
+  
     const form = e.target as HTMLFormElement;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const password = (form.elements.namedItem("password") as HTMLInputElement).value;
-
+  
     if (!email) {
       setEmailError("Email is required");
+      return;
     }
-
+  
     if (!password) {
       setPasswordError("Password is required");
+      return;
+    }
+  
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      let data = null;
+      try {
+        const text = await response.text(); // hindari langsung .json()
+        data = text ? JSON.parse(text) : null;
+      } catch (err) {
+        console.warn("Gagal parsing JSON response:", err);
+      }
+  
+      if (!response.ok) {
+        if (data?.message?.includes("Email")) setEmailError(data.message);
+        else if (data?.message?.includes("Password")) setPasswordError(data.message);
+        setLoginError(data?.message || "Email atau Password tidak sesuai");
+        return;
+      }
+  
+      router.push("/homePage");
+    } catch (error) {
+      console.error("Login error:", error);
+      setLoginError("Terjadi kesalahan saat login");
     }
   };
 
@@ -63,7 +95,14 @@ export function LoginPage() {
           <p className="text-[#697586] font-jakarta font-normal text-base text-center mb-6">
             Fill your account information to get in
           </p>
-
+          {loginError && (
+              <div className="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
+              <div className="flex items-center">
+                <FaExclamationCircle className="mr-2" />
+                <span>{loginError}</span>
+              </div>
+            </div>
+          )}
           <form onSubmit={handleLogin}>
             <div className="mb-4">
               <label className="block text-[#011829] font-medium text-sm">Email</label>
@@ -102,7 +141,7 @@ export function LoginPage() {
               )}
             </div>
 
-            <button className="w-full bg-[#1877AA] text-white py-2 font-inter text-sm rounded-md hover:bg-blue-700" onClick={() => router.push('/landingPage')}>
+            <button className="w-full bg-[#1877AA] text-white py-2 font-inter text-sm rounded-md hover:bg-blue-700">
               Login
             </button>
           </form>

@@ -13,7 +13,7 @@ export async function connectDB() {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
-      dbName: "yourdbname",
+      dbName: "AkuTrust",
       bufferCommands: false,
     }).then((mongoose) => {
       return mongoose;
