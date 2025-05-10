@@ -12,7 +12,7 @@ const data = [
   { name: 'Mar', value: 200 },
   { name: 'Apr', value: 300 },
   { name: 'Mei', value: 400 },
-  { name: 'Jun', value: 350 },
+  { name: 'Jun', value: 750 },
   { name: 'Jul', value: 500 },
   { name: 'Agu', value: 450 },
   { name: 'Oct', value: 400 },
@@ -24,6 +24,8 @@ const projects = [
   { id: 1, idProyek: '#IDP01', description: 'Perbaikan Bangunan', location: 'Puskesmas Gayungan', image: "/proyek1.png" },
   { id: 2, idProyek: '#IDP02', description: 'Perbaikan Bangunan', location: 'Pemkot Surabaya', image: "/proyek2.png" },
   { id: 3, idProyek: '#IDP03', description: 'Perbaikan Bangunan', location: 'Rumah Sakit Hewan Surabaya', image: "/proyek3.png" },
+  { id: 4, idProyek: '#IDP04', description: 'Perbaikan Bangunan', location: 'Rumah Sakit Surabaya', image: "/proyek3.png" },
+
 ];
 
 const HomePage = () => {

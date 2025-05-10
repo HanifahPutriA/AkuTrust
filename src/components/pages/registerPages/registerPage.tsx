@@ -16,7 +16,7 @@ export function RegisterPage() {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setNameError("");
-    setEmailError("");
+    setEmailError("");  
     setPasswordError("");
     setServerError("");
 
