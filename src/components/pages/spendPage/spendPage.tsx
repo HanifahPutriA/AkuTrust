@@ -325,7 +325,9 @@ const SpendPage = () => {
                     </tbody>
                   </table>
                   <div className="flex justify-end mt-5 mr-2">
-                      <button className="bg-[#1877AA] text-white p-2 rounded-full">
+                      <button 
+                      className="bg-[#1877AA] text-white p-2 rounded-full"
+                      onClick={() => router.push('/verifikasi')}>
                         <Plus size={24} />
                       </button>
                   </div>
