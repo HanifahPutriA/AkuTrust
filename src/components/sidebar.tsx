@@ -31,10 +31,22 @@ export const Sidebar = ({ sidebarOpen, setSidebarOpen, activeTab, setActiveTab }
     router.push('/budgetAI');
   };
 
-  const handleLogoutClick = () => {
-    router.push('/landingPage');
+  const handleLogoutClick = async () => {
+    const res = await fetch("/api/logout", {
+      method: "POST",
+      credentials: "include", // Agar cookie dikirim
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      // Arahkan pengguna ke landing page setelah logout berhasil
+      router.push('/landingPage');
+    } else {
+      alert("Logout gagal, coba lagi.");
+    }
   };
 
+  
   return (
     <div className={`fixed top-0 right-0 h-full bg-white border-l border-gray-200 w-60 z-40 transition-transform duration-300 transform ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'} md:translate-x-0 md:left-0 md:w-48 md:z-10`}>
       <div className="flex justify-between items-center p-4 border-b border-gray-200 md:border-b-0">

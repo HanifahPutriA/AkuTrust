@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
+    
     await connectDB();
 
     const user = await User.findOne({ email });
@@ -29,7 +30,8 @@ export async function POST(req: Request) {
     const token = await generateToken({
       id: user._id.toString(),
       email: user.email,
-      role: user.role,
+      name: user.name, // tambahkan ini
+
     });
 
     const response = NextResponse.json(
@@ -39,7 +41,7 @@ export async function POST(req: Request) {
 
     response.cookies.set("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       path: "/",
       maxAge: 60 * 60, // 1 jam
     });
@@ -53,3 +55,4 @@ export async function POST(req: Request) {
     );
   }
 }
+

@@ -156,7 +156,7 @@ export function LoginPage() {
             Using ID for Government and Verificator
           </button>
           <p className="text-center text-black font-jakarta font-bold mt-4 text-sm">
-            Don&apos;t have an account? <a href="#" className="text-[#0040C1]">Sign In</a>
+            Don&apos;t have an account? <a href="/register" className="text-[#0040C1]">Sign Up</a>
           </p>
         </div>
       </div>
