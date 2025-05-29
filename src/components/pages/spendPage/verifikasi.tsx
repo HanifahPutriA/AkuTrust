@@ -17,6 +17,7 @@ export default function VerifikasiPage() {
         setSidebarOpen={setSidebarOpen}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
+        isMobile
       />
 
       {/* Main Content */}
@@ -108,7 +109,7 @@ export default function VerifikasiPage() {
         <div className="flex justify-end mt-8">
           <button
             className="bg-[#1877AA] hover:bg-[#145f88] text-white text-sm px-6 py-2 rounded-md"
-            onClick={() => router.push('/')}
+            onClick={() => router.push('/spendPage')}
           >
             Selesai
           </button>

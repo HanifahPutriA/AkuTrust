@@ -12,7 +12,7 @@ const data = [
   { name: 'Mar', value: 200 },
   { name: 'Apr', value: 300 },
   { name: 'Mei', value: 400 },
-  { name: 'Jun', value: 350 },
+  { name: 'Jun', value: 750 },
   { name: 'Jul', value: 500 },
   { name: 'Agu', value: 450 },
   { name: 'Oct', value: 400 },
@@ -22,14 +22,24 @@ const data = [
 
 const projects = [
   { id: 1, idProyek: '#IDP01', description: 'Perbaikan Bangunan', location: 'Puskesmas Gayungan', image: "/proyek1.png" },
-  { id: 2, idProyek: '#IDP02', description: 'Perbaikan Bangunan', location: 'Pemkot Surabaya', image: "/proyek2.png" },
-  { id: 3, idProyek: '#IDP03', description: 'Perbaikan Bangunan', location: 'Rumah Sakit Hewan Surabaya', image: "/proyek3.png" },
 ];
 
-const HomePage = () => {
+type Props = {
+  user : {name:string} | null;
+  projects: {
+    _id: string;
+    id_proyek: string;
+    deskripsi_proyek: string;
+    lokasi_proyek: string;
+    foto_proyek: string;
+  }[];
+}
+
+const HomePage = ({ user, projects }: Props) => {
   const [activeTab, setActiveTab] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -49,6 +59,7 @@ const HomePage = () => {
           setSidebarOpen={setSidebarOpen}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          isMobile
         />
 
       <div className='w-full'>
@@ -56,7 +67,7 @@ const HomePage = () => {
         <div className="fixed top-0 w-full bg-white border-b border-gray-200 flex justify-between items-center py-2 px-4 z-20 md:hidden">
           <div className="flex flex-col items-start">
             <div className="text-xs font-inter font-normal">Instansi</div>
-            <div className="font-inter font-semibold text-base">Kota Surabaya</div>
+            <div className="font-inter font-semibold text-base"> {user?.name ?? ""}</div>
           </div>
           <div className="flex items-center">
             <button className="p-2 rounded-md bg-[#1877AA] mr-2 hover:bg-[#1565A0]">
@@ -77,7 +88,7 @@ const HomePage = () => {
           <div className="hidden md:flex bg-white border-b border-gray-200 justify-between items-center py-2 px-6">
             <div>
               <div className="text-sm text-gray-500">Instansi</div>
-              <div className="font-medium">Kota Surabaya</div>
+              <div className="font-medium">{user?.name ?? ""}</div>
             </div>
             <div className="flex">
               <button className="p-2 rounded-md bg-[#1877AA] mr-2 hover:bg-[#1565A0]">
@@ -144,7 +155,7 @@ const HomePage = () => {
                 </div>
                 
                 {/* Status */}
-                <div className="bg-white rounded-md shadow-sm p-4">
+                {/* <div className="bg-white rounded-md shadow-sm p-4">
                   <div className="text-black text-sm font-medium font-inter mb-2 border-b border-[#E3E8EF]">Status</div>
                   <div className="flex items-start border p-4 rounded-lg">
                     <Image src="/status.png" width={80} height={60} alt="Building" className="rounded-md mr-3" />
@@ -153,7 +164,7 @@ const HomePage = () => {
                       <div className="text-xs font-medium font-inter text-gray-500">Diajukan sejak: 14/03/2025</div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -183,15 +194,15 @@ const HomePage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {projects.map((project) => (
-                    <tr key={project.id} className="border-b border-gray-200 hover:bg-gray-50">
-                      <td className="py-3 px-4">{project.id}</td>
-                      <td className="py-3 px-4">{project.idProyek}</td>
+                  {projects.map((project, index) => (
+                    <tr key={project._id} className="border-b border-gray-200 hover:bg-gray-50">
+                      <td className="py-3 px-4">{index+1}</td>
+                      <td className="py-3 px-4">{project.id_proyek}</td>
                       <td className="py-3 px-4">
-                        <Image src={project.image} width={80} height={50} alt="Project" className="rounded-md" />
+                        <Image src={project.foto_proyek} width={80} height={50} alt="Project" className="rounded-md" />
                       </td>
-                      <td className="py-3 px-4">{project.description}</td>
-                      <td className="py-3 px-4">{project.location}</td>
+                      <td className="py-3 px-4">{project.deskripsi_proyek}</td>
+                      <td className="py-3 px-4">{project.lokasi_proyek}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -207,15 +218,15 @@ const HomePage = () => {
                 <div>Deskripsi Proyek</div>
                 <div>Lokasi Proyek</div>
               </div>
-              {projects.map((project) => (
-                <div key={project.id} className="grid grid-cols-5 gap-2 py-2 text-xs border-b border-gray-200">
-                  <div>{project.id}</div>
-                  <div>{project.idProyek}</div>
+              {projects.map((project,index) => (
+                <div key={project._id} className="grid grid-cols-5 gap-2 py-2 text-xs border-b border-gray-200">
+                  <div>{index+1}</div>
+                  <div>{project.id_proyek}</div>
                   <div>
-                    <Image src={project.image} width={40} height={30} alt="Project" className="rounded-md" />
+                    <Image src={project.foto_proyek} width={40} height={30} alt={project.deskripsi_proyek} className="rounded-md" />
                   </div>
-                  <div className="truncate">{project.description}</div>
-                  <div className="truncate">{project.location}</div>
+                  <div className="truncate">{project.deskripsi_proyek}</div>
+                  <div className="truncate">{project.lokasi_proyek}</div>
                 </div>
               ))}
             </div>

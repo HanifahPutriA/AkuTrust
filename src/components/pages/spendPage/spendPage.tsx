@@ -9,7 +9,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import FeedbackPopup from '@/components/pages/spendPage/feedback'; 
 import { useRouter } from 'next/navigation';
 
-const SpendPage = () => {
+  type Props = {
+    projects: {
+      _id: string;
+      id_proyek: string;
+      deskripsi_proyek: string;
+      lokasi_proyek: string;
+      foto_proyek: string;
+      status_proyek: string;
+    }[];
+  };
+
+const SpendPage = ({projects}:Props) => {
   const [activeTab, setActiveTab] = useState('spend');
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -37,11 +48,11 @@ const SpendPage = () => {
   // };
 
   const tabs = [
-    { id: 'semua', label: 'Semua' },
+    // { id: 'semua', label: 'Semua' },
     { id: 'belum', label: 'Belum diverifikasi' },
-    { id: 'sedang', label: 'Sedang diverifikasi' },
+    // { id: 'sedang', label: 'Sedang diverifikasi' },
     { id: 'telah', label: 'Telah diverifikasi' },
-    { id: 'ditolak', label: 'Ditolak' }
+    // { id: 'ditolak', label: 'Ditolak' }
   ];
 
   const toggleSidebar = () => {
@@ -61,12 +72,12 @@ const SpendPage = () => {
     id: string;
   };
   
-  const projects: Project[] = [
-    { date: '17 Mar 25', status: 'Belum', id: '#IDPO1' },
-    { date: '17 Mar 25', status: 'Belum', id: '#IDPO2' },
-    { date: '17 Mar 25', status: 'Belum', id: '#IDPO3' },
-    { date: '17 Mar 25', status: 'Belum', id: '#IDPO4' },
-  ];
+  // const projects: Project[] = [
+  //   { date: '17 Mar 25', status: 'Belum', id: '#IDPO1' },
+  //   { date: '17 Mar 25', status: 'Belum', id: '#IDPO2' },
+  //   { date: '17 Mar 25', status: 'Belum', id: '#IDPO3' },
+  //   { date: '17 Mar 25', status: 'Belum', id: '#IDPO4' },
+  // ];
 
   // Calculate total budget
   const totalBudget = budgetData.reduce((sum, item) => sum + item.amount, 0);
@@ -120,6 +131,7 @@ const SpendPage = () => {
           setSidebarOpen={setSidebarOpen}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
+          isMobile
         />
 
       <div className='w-full'>
@@ -281,7 +293,7 @@ const SpendPage = () => {
                     {/* Table Header */}
                     <thead>
                       <tr className="w-full bg-blue-50">
-                        <th className="px-4 py-3 text-left text-xs font-medium font-inter text-black rounded-l-lg">Tanggal</th>
+                        <th className="px-4 py-3 text-left text-xs font-medium font-inter text-black rounded-l-lg">No</th>
                         <th className="px-4 py-3 text-left text-xs font-medium font-inter text-black">Status</th>
                         <th className="px-4 py-3 text-left text-xs font-medium font-inter text-black">ID Proyek</th>
                         <th className="px-4 py-3 text-left text-xs font-medium font-inter text-black">Dokumen</th>
@@ -293,10 +305,10 @@ const SpendPage = () => {
                     {/* Table Body */}
                     <tbody>
                       {projects.map((project, index) => (
-                        <tr key={index} className="border-b border-gray-200">
-                          <td className="px-4 py-4 text-xs text-black font-inter font-medium">{project.date}</td>
-                          <td className="px-4 py-4 text-xs text-black font-inter font-medium">{project.status}</td>
-                          <td className="px-4 py-4 text-xs text-black font-inter font-medium">{project.id}</td>
+                        <tr key={project._id} className="border-b border-gray-200">
+                          <td className="px-4 py-4 text-xs text-black font-inter font-medium">{index + 1}</td>
+                          <td className="px-4 py-4 text-xs text-black font-inter font-medium">{project.status_proyek}</td>
+                          <td className="px-4 py-4 text-xs text-black font-inter font-medium">{project.id_proyek}</td>
                           <td className="px-4 py-4">
                             <button className="px-3 py-2 bg-[#1877AA] text-white text-sm rounded flex items-center space-x-2">
                               <span>Unduh</span>
@@ -327,7 +339,7 @@ const SpendPage = () => {
                   <div className="flex justify-end mt-5 mr-2">
                       <button 
                       className="bg-[#1877AA] text-white p-2 rounded-full"
-                      onClick={() => router.push('/verifikasi')}>
+                      onClick={() => router.push('/addPage')}>
                         <Plus size={24} />
                       </button>
                   </div>
